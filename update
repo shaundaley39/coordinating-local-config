@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+hostname -I | sed 's/\ /\n/g' | grep 192.168 | head -1 > ${ROLE}
+git add ${ROLE}
+git commit -m "${ROLE} IP updated"
+git push origin master
