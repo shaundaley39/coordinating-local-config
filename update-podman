@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-git pull
+
+if [ -z "${wdir}" ]; then wdir="./"; fi;
+git -C ${wdir} pull
 ROLE=podman
 # on startup, each container is assigned a single IP address beginning 10.*, which without configured forwarding is accessible only on the host machine
-hostname -I > ${ROLE}
-git add ${ROLE}
-git commit -m "${ROLE} IP updated"
-git push origin master
+hostname -I > ${wdir}${ROLE}
+git -C $wdir add ${ROLE}
+git -C $wdir commit -m "${ROLE} IP updated"
+git -C $wdir push origin master
